@@ -21,7 +21,8 @@ var sketch = require("gulp-sketch");
 gulp.task('sketch', function(){
   gulp.src("./src/sketch/*.sketch")
     .pipe(sketch({
-      export: 'slices'
+      export: 'slices',
+      formats: 'png'
     }))
     .pipe(gulp.dest("./dist/html/"));
 });
@@ -35,7 +36,9 @@ sketch = require 'gulp-sketch'
 
 gulp.task 'sketch', ->
   gulp.src './src/sketch/*.sketch'
-  .pipe sketch export: 'slices'
+  .pipe sketch
+    export: 'slices'
+    formats: 'png'
   .pipe gulp.dest './dist/html/'
 ```
 
