@@ -24,13 +24,3 @@ describe 'gulp-sketch', () ->
         data.should.equal emptyFile
         done()
       stream.write emptyFile
-    
-    it 'should emit error when file isStream()', (done) ->
-      stream = sketch()
-      streamFile =
-        isNull: () -> false
-        isStream: () -> true
-      stream.on 'error', (err) ->
-        err.message.should.equal 'Streaming not supported'
-        done()
-      stream.write streamFile

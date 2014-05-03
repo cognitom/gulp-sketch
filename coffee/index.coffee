@@ -21,13 +21,9 @@ module.exports = (options = {}) ->
 	
 	through.obj (file, encoding, callback) ->
 		
-		# filename.sketch is a directory
+		# file_name.sketch is a directory
 		unless file.isNull()
 			@push file
-			return callback()
-		
-		if file.isStream()
-			@emit 'error', new gutil.PluginError PLUGIN_NAME, 'Streaming not supported'
 			return callback()
 		
 		src = file.path

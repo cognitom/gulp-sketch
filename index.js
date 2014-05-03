@@ -42,10 +42,6 @@
         this.push(file);
         return callback();
       }
-      if (file.isStream()) {
-        this.emit('error', new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
-        return callback();
-      }
       src = file.path;
       tmp = path.dirname(src) + path.sep + '___tmp___' + path.basename(src).replace('.sketch', '');
       program = spawn(cmnd, args.concat(src, '--output=' + tmp));
