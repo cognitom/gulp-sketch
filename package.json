@@ -1,7 +1,7 @@
 {
   "name": "gulp-sketch",
   "description": "SketchTool plugin for gulp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/cognitom/gulp-sketch",
   "repository": {
     "type": "git",
@@ -14,9 +14,7 @@
   "main": "./index.js",
   "keywords": [
     "gulpplugin",
-    "sketch",
-    "sketch-lang",
-    "template"
+    "sketch"
   ],
   "dependencies": {
     "coffee-script": "*",
