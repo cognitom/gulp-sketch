@@ -1,7 +1,7 @@
 {
   "name": "gulp-sketch",
   "description": "SketchTool plugin for gulp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/cognitom/gulp-sketch",
   "repository": {
     "type": "git",
@@ -11,17 +11,18 @@
     "name": "Tsutomu Kawamura",
     "url": "http://librize.com/"
   },
-  "main": "./index.js",
+  "main": "./coffee/index.coffee",
   "keywords": [
     "gulpplugin",
     "sketch"
   ],
   "dependencies": {
-    "coffee-script": "*",
     "through2": "*",
+    "temporary": "*",
     "gulp-util": "*"
   },
   "devDependencies": {
+    "coffee-script": "*",
     "should": "*",
     "mocha": "*",
     "gulp": "*",

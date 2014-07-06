@@ -1,5 +1,5 @@
 (function() {
-  var PLUGIN_NAME, fs, gutil, path, spawn, through;
+  var PLUGIN_NAME, fs, gutil, path, spawn, temporary, through;
 
   spawn = require('child_process').spawn;
 
@@ -10,6 +10,8 @@
   path = require('path');
 
   gutil = require('gulp-util');
+
+  temporary = require('temporary');
 
   PLUGIN_NAME = 'gulp-sketch';
 
@@ -37,21 +39,21 @@
       args.push('--bounds=' + options.bounds);
     }
     return through.obj(function(file, encoding, callback) {
-      var program, src, tmp;
+      var program, src, tmp_dir;
       if (!file.isNull()) {
         this.push(file);
         return callback();
       }
       src = file.path;
-      tmp = path.dirname(src) + path.sep + '___tmp___' + path.basename(src).replace('.sketch', '');
-      program = spawn(cmnd, args.concat(src, '--output=' + tmp));
+      tmp_dir = new temporary.Dir();
+      program = spawn(cmnd, args.concat(src, '--output=' + tmp_dir.path));
       return program.stdout.on('end', (function(_this) {
         return function() {
           var f, file_name, file_path, _i, _len, _ref;
-          _ref = fs.readdirSync(tmp);
+          _ref = fs.readdirSync(tmp_dir.path);
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             file_name = _ref[_i];
-            file_path = tmp + path.sep + file_name;
+            file_path = tmp_dir.path + path.sep + file_name;
             f = new gutil.File({
               cwd: file.cwd,
               base: file.base,
@@ -61,7 +63,7 @@
             _this.push(f);
             fs.unlinkSync(file_path);
           }
-          fs.rmdirSync(tmp);
+          tmp_dir.rmdirSync();
           return callback();
         };
       })(this));

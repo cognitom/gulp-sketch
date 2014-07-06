@@ -1,8 +1,9 @@
-{spawn} = require 'child_process'
-through  = require 'through2'
-fs = require 'fs'
-path = require 'path'
-gutil = require 'gulp-util'
+{spawn}   = require 'child_process'
+through   = require 'through2'
+fs        = require 'fs'
+path      = require 'path'
+gutil     = require 'gulp-util'
+temporary = require 'temporary'
 
 PLUGIN_NAME = 'gulp-sketch'
 
@@ -27,15 +28,15 @@ module.exports = (options = {}) ->
 			return callback()
 		
 		src = file.path
-		tmp = path.dirname(src) + path.sep + '___tmp___' + path.basename(src).replace('.sketch', '')
+		tmp_dir = new temporary.Dir()
 		
 		# SketchTool
-		program = spawn cmnd, args.concat src, '--output=' + tmp
+		program = spawn cmnd, args.concat src, '--output=' + tmp_dir.path
 		
 		# return data
 		program.stdout.on 'end', =>
-			for file_name in fs.readdirSync tmp
-				file_path = tmp + path.sep + file_name
+			for file_name in fs.readdirSync tmp_dir.path
+				file_path = tmp_dir.path + path.sep + file_name
 				f = new gutil.File
 					cwd: file.cwd
 					base: file.base
@@ -43,6 +44,6 @@ module.exports = (options = {}) ->
 				f.contents = fs.readFileSync file_path
 				@push f
 				fs.unlinkSync file_path
-			fs.rmdirSync tmp
+			tmp_dir.rmdirSync()
 			callback()
 			
