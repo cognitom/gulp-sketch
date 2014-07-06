@@ -24,14 +24,14 @@ gulp.task('sketch', function(){
       export: 'slices',
       formats: 'png'
     }))
-    .pipe(gulp.dest("./dist/html/"));
+    .pipe(gulp.dest("./dist/images/"));
 });
 ```
 
 or write it in CoffeeScript.
 
 ```coffeescript
-gulp = requier 'gulp'
+gulp = require 'gulp'
 sketch = require 'gulp-sketch'
 
 gulp.task 'sketch', ->
@@ -39,7 +39,7 @@ gulp.task 'sketch', ->
   .pipe sketch
     export: 'slices'
     formats: 'png'
-  .pipe gulp.dest './dist/html/'
+  .pipe gulp.dest './dist/images/'
 ```
 
 
