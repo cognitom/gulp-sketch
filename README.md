@@ -19,7 +19,7 @@ var gulp = require("gulp");
 var sketch = require("gulp-sketch");
 
 gulp.task('sketch', function(){
-  gulp.src("./src/sketch/*.sketch")
+  return gulp.src("./src/sketch/*.sketch")
     .pipe(sketch({
       export: 'slices',
       formats: 'png'
