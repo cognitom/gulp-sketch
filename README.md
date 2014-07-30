@@ -48,7 +48,7 @@ gulp.task 'sketch', ->
 The options are the same as what's supported by `SketchTool`.
 
 - `export`: pages,artboards,slices
-- `formats`: png,pdf,eps,jpg
+- `formats`: png,jpg,pdf,eps,svg
 - `scales`: 1.0,2.0
 - `items`: 
 - `bounds`: 
