@@ -50,5 +50,8 @@ The options are the same as what's supported by `SketchTool`.
 - `export`: pages,artboards,slices
 - `formats`: png,jpg,pdf,eps,svg
 - `scales`: 1.0,2.0
-- `items`: 
-- `bounds`: 
+- `items`: List of artboard/slice names or ids to export. The default is to export all artboards/slices (optional).
+- `bounds`:
+- `saveForWeb`: Export web-ready images (optional, defaults to NO).
+- `compact`: Export in compact form. Currently only relevant for SVG export. (optional, defaults to NO).
+- `trimmed`: Export images trimmed. (optional, defaults to NO).
