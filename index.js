@@ -36,16 +36,16 @@
       args.push('--scales=' + options.scales);
     }
     if (options.saveForWeb) {
-      args.push('--save-for-web', + options.saveForWeb);
+      args.push('--save-for-web=' + options.saveForWeb);
     }
     if (options.bounds) {
       args.push('--bounds=' + options.bounds);
     }
-    if(options.compact) {
-     args.push('--compact', + options.compact);
+    if (options.compact) {
+      args.push('--compact=' + options.compact);
     }
     if (options.trimmed) {
-      args.push('--trimmed' + options.trimmed);
+      args.push('--trimmed=' + options.trimmed);
     }
     return through.obj(function(file, encoding, callback) {
       var program, src, tmp_dir;
