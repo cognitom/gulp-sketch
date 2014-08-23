@@ -16,9 +16,12 @@ module.exports = (options = {}) ->
     args.push 'export'
     args.push options.export
   args.push '--formats=' + options.formats if options.formats
-  args.push '--scales=' + options.scales if options.scales
   args.push '--items=' + options.items if options.items
+  args.push '--scales=' + options.scales if options.scales
+  args.push '--save-for-web=' + options.saveForWeb if options.saveForWeb
   args.push '--bounds=' + options.bounds if options.bounds
+  args.push '--compact=' + options.compact if options.compact
+  args.push '--trimmed=' + options.trimmed if options.trimmed
   
   through.obj (file, encoding, callback) ->
     
