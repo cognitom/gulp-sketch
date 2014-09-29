@@ -56,7 +56,7 @@
     options.clean = yesOrNo(options.clean);
     return through.obj(function(file, encoding, callback) {
       var program, src, tmp_dir;
-      if (!file.isNull()) {
+      if (file.isStream()) {
         this.push(file);
         return callback();
       }
