@@ -19,7 +19,8 @@
   "dependencies": {
     "through2": "*",
     "temporary": "*",
-    "gulp-util": "*"
+    "gulp-util": "*",
+    "clean-sketch": "*"
   },
   "devDependencies": {
     "coffee-script": "*",

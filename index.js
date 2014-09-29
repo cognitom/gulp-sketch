@@ -1,5 +1,5 @@
 (function() {
-  var PLUGIN_NAME, fs, gutil, path, spawn, temporary, through;
+  var PLUGIN_NAME, cleanSketch, fs, gutil, path, spawn, temporary, through, yesOrNo;
 
   spawn = require('child_process').spawn;
 
@@ -13,7 +13,13 @@
 
   temporary = require('temporary');
 
+  cleanSketch = require('clean-sketch');
+
   PLUGIN_NAME = 'gulp-sketch';
+
+  yesOrNo = function(val) {
+    return val === true || val === 'Yes' || val === 'yes' || val === 'YES';
+  };
 
   module.exports = function(options) {
     var args, cmnd;
@@ -47,6 +53,7 @@
     if (options.trimmed) {
       args.push('--trimmed=' + options.trimmed);
     }
+    options.clean = yesOrNo(options.clean);
     return through.obj(function(file, encoding, callback) {
       var program, src, tmp_dir;
       if (!file.isNull()) {
@@ -58,7 +65,7 @@
       program = spawn(cmnd, args.concat(src, '--output=' + tmp_dir.path));
       return program.stdout.on('end', (function(_this) {
         return function() {
-          var f, file_name, file_path, _i, _len, _ref;
+          var b, f, file_name, file_path, _i, _len, _ref;
           _ref = fs.readdirSync(tmp_dir.path);
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             file_name = _ref[_i];
@@ -68,7 +75,11 @@
               base: file.base,
               path: file.base + file_name
             });
-            f.contents = fs.readFileSync(file_path);
+            b = fs.readFileSync(file_path);
+            if (options.clean && /\.svg$/.test(file_name)) {
+              b = new Buffer(cleanSketch(b.toString()));
+            }
+            f.contents = b;
             _this.push(f);
             fs.unlinkSync(file_path);
           }

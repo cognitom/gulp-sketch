@@ -1,11 +1,14 @@
-{spawn}   = require 'child_process'
-through   = require 'through2'
-fs        = require 'fs'
-path      = require 'path'
-gutil     = require 'gulp-util'
-temporary = require 'temporary'
+{spawn}     = require 'child_process'
+through     = require 'through2'
+fs          = require 'fs'
+path        = require 'path'
+gutil       = require 'gulp-util'
+temporary   = require 'temporary'
+cleanSketch = require 'clean-sketch'
 
 PLUGIN_NAME = 'gulp-sketch'
+
+yesOrNo = (val) -> val == true || val == 'Yes' || val == 'yes' || val == 'YES'
 
 module.exports = (options = {}) ->
 
@@ -22,6 +25,8 @@ module.exports = (options = {}) ->
   args.push '--bounds=' + options.bounds if options.bounds
   args.push '--compact=' + options.compact if options.compact
   args.push '--trimmed=' + options.trimmed if options.trimmed
+  
+  options.clean = yesOrNo options.clean
   
   through.obj (file, encoding, callback) ->
     
@@ -44,7 +49,9 @@ module.exports = (options = {}) ->
           cwd: file.cwd
           base: file.base
           path: file.base + file_name
-        f.contents = fs.readFileSync file_path
+        b = fs.readFileSync file_path
+        b = new Buffer cleanSketch b.toString() if options.clean && /\.svg$/.test file_name
+        f.contents = b
         @push f
         fs.unlinkSync file_path
       tmp_dir.rmdirSync()

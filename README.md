@@ -55,3 +55,7 @@ The options are the same as what's supported by `SketchTool`.
 - `saveForWeb`: Export web-ready images (optional, defaults to NO).
 - `compact`: Export in compact form. Currently only relevant for SVG export. (optional, defaults to NO).
 - `trimmed`: Export images trimmed. (optional, defaults to NO).
+
+Additionally, it has `clean` option for exporting SVG.
+
+- `clean`: Remove Sketch namespaces and metadata from SVG (optional, defaults to NO). See [clean-sketch](https://github.com/overblog/clean-sketch).

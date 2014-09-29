@@ -8,9 +8,10 @@ gulp.task 'default', ->
   .pipe gulp.dest './'
   
 gulp.task 'test1', ->
-  gulp.src './test/fixtures/*.sketch'
+  gulp.src './test/fixtures/symbol-font-14px.sketch'
   .pipe sketch
-    export: 'slices'
-    formats: 'png'
+    export: 'artboards'
+    formats: 'svg'
+    clean: true
   .pipe gulp.dest './tmp/'
   
