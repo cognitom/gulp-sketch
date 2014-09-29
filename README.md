@@ -1,4 +1,4 @@
-# gulp-sketch [![Build Status](https://travis-ci.org/cognitom/gulp-sketch.svg?branch=master)](https://travis-ci.org/cognitom/gulp-sketch)
+# gulp-sketch [![Build Status](https://travis-ci.org/cognitom/gulp-sketch.svg?branch=master)](https://travis-ci.org/cognitom/gulp-sketch) [![Stories in Ready](https://badge.waffle.io/cognitom/gulp-sketch.png?label=ready&title=Ready)](https://waffle.io/cognitom/gulp-sketch)
 
 A [SketchTool](http://bohemiancoding.com/sketch/tool/) plugin for [gulp](https://github.com/wearefractal/gulp).
 
