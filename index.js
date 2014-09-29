@@ -56,8 +56,8 @@
     options.clean = yesOrNo(options.clean);
     return through.obj(function(file, encoding, callback) {
       var program, src, tmp_dir;
-      if (!file.isNull()) {
-        this.push(file);
+      if (file.isStream()) {
+        this.emit('error', new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
         return callback();
       }
       src = file.path;

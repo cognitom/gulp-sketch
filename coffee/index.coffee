@@ -29,11 +29,12 @@ module.exports = (options = {}) ->
   options.clean = yesOrNo options.clean
   
   through.obj (file, encoding, callback) ->
-    
-    # file_name.sketch is a directory
-    unless file.isNull()
-      @push file
+    if file.isStream()
+      @emit 'error', new gutil.PluginError PLUGIN_NAME, 'Streaming not supported'
       return callback()
+    
+    # file_name.sketch is a directory (=3.0)
+    # file_name.sketch is a file (>3.1)
     
     src = file.path
     tmp_dir = new temporary.Dir()
@@ -56,4 +57,3 @@ module.exports = (options = {}) ->
         fs.unlinkSync file_path
       tmp_dir.rmdirSync()
       callback()
-      
