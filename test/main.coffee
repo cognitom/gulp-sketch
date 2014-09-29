@@ -16,11 +16,15 @@ createFile = (sketchFileName, contents) ->
 
 describe 'gulp-sketch', () ->
   describe 'sketch()', () ->
-    it 'should pass file when it is not isNull()', (done) ->
+    
+    @timeout 10000
+    
+    it 'should emit error when file isStream()', (done) ->
       stream = sketch()
-      emptyFile =
+      streamFile =
         isNull: () -> false
-      stream.on 'data', (data) ->
-        data.should.equal emptyFile
+        isStream: () -> true
+      stream.on 'error', (err) ->
+        err.message.should.equal 'Streaming not supported'
         done()
-      stream.write emptyFile
+      stream.write streamFile

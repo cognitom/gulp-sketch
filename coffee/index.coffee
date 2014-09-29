@@ -30,7 +30,7 @@ module.exports = (options = {}) ->
   
   through.obj (file, encoding, callback) ->
     if file.isStream()
-      @push file
+      @emit 'error', new gutil.PluginError PLUGIN_NAME, 'Streaming not supported'
       return callback()
     
     # file_name.sketch is a directory (=3.0)
