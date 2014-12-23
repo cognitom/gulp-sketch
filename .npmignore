@@ -1,4 +1,5 @@
 tmp/
 coffee/
 test/
+doc/
 gulpfile.*
