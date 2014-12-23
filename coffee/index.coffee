@@ -5,6 +5,8 @@ path        = require 'path'
 gutil       = require 'gulp-util'
 temporary   = require 'temporary'
 cleanSketch = require 'clean-sketch'
+recursive   = require 'recursive-readdir'
+rimraf      = require 'rimraf'
 
 PLUGIN_NAME = 'gulp-sketch'
 
@@ -44,16 +46,15 @@ module.exports = (options = {}) ->
     
     # return data
     program.stdout.on 'end', =>
-      for file_name in fs.readdirSync tmp_dir.path
-        file_path = tmp_dir.path + path.sep + file_name
-        f = new gutil.File
-          cwd: file.cwd
-          base: file.base
-          path: file.base + file_name
-        b = fs.readFileSync file_path
-        b = new Buffer cleanSketch b.toString() if options.clean && /\.svg$/.test file_name
-        f.contents = b
-        @push f
-        fs.unlinkSync file_path
-      tmp_dir.rmdirSync()
-      callback()
+      recursive tmp_dir.path, (err, files) =>
+        for abs_path in files
+          rel_path = path.relative tmp_dir.path, abs_path
+          f = new gutil.File
+            cwd: file.cwd
+            base: file.base
+            path: path.join file.base, rel_path
+          b = fs.readFileSync abs_path
+          b = new Buffer cleanSketch b.toString() if options.clean && /\.svg$/.test rel_path
+          f.contents = b
+          @push f
+        rimraf tmp_dir.path, -> callback()
