@@ -2,5 +2,8 @@ language: objective-c
 node_js:
   - 0.10
 before_install:
+  - node -v
   - npm install -g gulp
   - curl -L https://raw.githubusercontent.com/cognitom/dotfiles/master/lib/sketchtool.sh | sudo sh
+install: npm install
+script: npm test
