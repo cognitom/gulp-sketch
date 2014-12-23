@@ -1,13 +1,13 @@
 should = require 'should'
-sketch = require '../'
-gutil = require 'gulp-util'
-fs = require 'fs' 
-path = require 'path'
+sketch = require '../coffee/'
+gutil  = require 'gulp-util'
+fs     = require 'fs'
+path   = require 'path'
 
-createFile = (sketchFileName, contents) ->
+createVinyl = (file_name, contents) ->
   base = path.join __dirname, 'fixtures'
-  filePath = path.join base, sketchFileName
-
+  filePath = path.join base, file_name
+  
   new gutil.File
     cwd: __dirname
     base: base
@@ -28,3 +28,33 @@ describe 'gulp-sketch', () ->
         err.message.should.equal 'Streaming not supported'
         done()
       stream.write streamFile
+
+    it 'should export single png file', (done) ->
+      src = createVinyl 'flat.sketch'
+      stream = sketch
+        export: 'slices'
+        formats: 'png'
+      stream.on 'data', (dist) ->
+        should.exist dist
+        should.exist dist.path
+        should.exist dist.relative
+        should.exist dist.contents
+        dist.path.should.equal path.join __dirname, 'fixtures', 'yellow.png'
+        dist.contents.toString().should.equal fs.readFileSync path.join(__dirname, 'expect/yellow.png'), 'utf8'
+        done()
+      stream.write src
+    
+    it 'should export single png file under subdirectory', (done) ->
+      src = createVinyl 'subdir.sketch'
+      stream = sketch
+        export: 'slices'
+        formats: 'png'
+      stream.on 'data', (dist) ->
+        should.exist dist
+        should.exist dist.path
+        should.exist dist.relative
+        should.exist dist.contents
+        dist.path.should.equal path.join __dirname, 'fixtures', 'square', 'yellow.png'
+        dist.contents.toString().should.equal fs.readFileSync path.join(__dirname, 'expect/yellow.png'), 'utf8'
+        done()
+      stream.write src
