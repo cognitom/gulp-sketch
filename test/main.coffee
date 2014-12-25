@@ -34,6 +34,7 @@ describe 'gulp-sketch', () ->
       stream = sketch
         export: 'slices'
         formats: 'png'
+        saveForWeb: true
       stream.on 'data', (dist) ->
         should.exist dist
         should.exist dist.path
@@ -51,6 +52,7 @@ describe 'gulp-sketch', () ->
       stream = sketch
         export: 'slices'
         formats: 'png'
+        saveForWeb: true
       stream.on 'data', (dist) ->
         should.exist dist
         should.exist dist.path
