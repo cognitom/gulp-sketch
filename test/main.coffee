@@ -40,8 +40,9 @@ describe 'gulp-sketch', () ->
         should.exist dist.relative
         should.exist dist.contents
         dist.path.should.equal path.join __dirname, 'fixtures', 'yellow.png'
-        expected = fs.readFileSync path.join(__dirname, 'expect', 'yellow.png'), 'binary'
-        dist.contents.toString('binary').should.equal expected
+        actual = dist.contents.toString 'hex'
+        expected = fs.readFileSync path.join(__dirname, 'expect', 'yellow.png'), 'hex'
+        actual.should.equal expected
         done()
       stream.write src
     
@@ -56,7 +57,8 @@ describe 'gulp-sketch', () ->
         should.exist dist.relative
         should.exist dist.contents
         dist.path.should.equal path.join __dirname, 'fixtures', 'square', 'yellow.png'
-        expected = fs.readFileSync path.join(__dirname, 'expect', 'yellow.png'), 'binary'
-        dist.contents.toString('binary').should.equal expected
+        actual = dist.contents.toString 'hex'
+        expected = fs.readFileSync path.join(__dirname, 'expect', 'yellow.png'), 'hex'
+        actual.should.equal expected
         done()
       stream.write src
