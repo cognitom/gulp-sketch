@@ -12,7 +12,7 @@ gulp.task 'test-flat', ->
   .pipe sketch
     export: 'slices'
     formats: 'png'
-    clean: true
+    saveForWeb: true
   .pipe gulp.dest './tmp/test/flat'
 
 gulp.task 'test-subdir', ->
@@ -20,6 +20,13 @@ gulp.task 'test-subdir', ->
   .pipe sketch
     export: 'slices'
     formats: 'png'
-    clean: true
+    saveForWeb: true
   .pipe gulp.dest './tmp/test/subdir'
+  
+gulp.task 'test-svg', ->
+  gulp.src './test/fixtures/flat.sketch'
+  .pipe sketch
+    export: 'slices'
+    formats: 'svg'
+  .pipe gulp.dest './tmp/test/svg'
   

@@ -28,6 +28,23 @@ describe 'gulp-sketch', () ->
         err.message.should.equal 'Streaming not supported'
         done()
       stream.write streamFile
+    
+    it 'should export single svg file', (done) ->
+      src = createVinyl 'flat.sketch'
+      stream = sketch
+        export: 'slices'
+        formats: 'svg'
+      stream.on 'data', (dist) ->
+        should.exist dist
+        should.exist dist.path
+        should.exist dist.relative
+        should.exist dist.contents
+        dist.path.should.equal path.join __dirname, 'fixtures', 'yellow.svg'
+        actual = dist.contents.toString 'utf8'
+        expected = fs.readFileSync path.join(__dirname, 'expect', 'yellow.svg'), 'utf8'
+        actual.should.equal expected
+        done()
+      stream.write src
 
     it 'should export single png file', (done) ->
       src = createVinyl 'flat.sketch'
