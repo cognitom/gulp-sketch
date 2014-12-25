@@ -29,4 +29,11 @@ gulp.task 'test-svg', ->
     export: 'slices'
     formats: 'svg'
   .pipe gulp.dest './tmp/test/svg'
+
+gulp.task 'test-svg-subdir', ->
+  gulp.src './test/fixtures/subdir.sketch'
+  .pipe sketch
+    export: 'slices'
+    formats: 'svg'
+  .pipe gulp.dest './tmp/test/svg-subdir'
   

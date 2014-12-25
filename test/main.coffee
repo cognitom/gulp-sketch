@@ -45,7 +45,25 @@ describe 'gulp-sketch', () ->
         actual.should.equal expected
         done()
       stream.write src
-
+      
+    it 'should export single svg file under subdirectory', (done) ->
+      src = createVinyl 'subdir.sketch'
+      stream = sketch
+        export: 'slices'
+        formats: 'svg'
+      stream.on 'data', (dist) ->
+        should.exist dist
+        should.exist dist.path
+        should.exist dist.relative
+        should.exist dist.contents
+        dist.path.should.equal path.join __dirname, 'fixtures', 'square', 'yellow.svg'
+        actual = dist.contents.toString 'utf8'
+        expected = fs.readFileSync path.join(__dirname, 'expect', 'square-yellow.svg'), 'utf8'
+        actual.should.equal expected
+        done()
+      stream.write src
+    
+    ###
     it 'should export single png file', (done) ->
       src = createVinyl 'flat.sketch'
       stream = sketch
@@ -81,3 +99,4 @@ describe 'gulp-sketch', () ->
         actual.should.equal expected
         done()
       stream.write src
+    ###
