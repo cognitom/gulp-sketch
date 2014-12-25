@@ -20,13 +20,18 @@ module.exports = (options = {}) ->
   if options.export
     args.push 'export'
     args.push options.export
-  args.push '--formats=' + options.formats if options.formats
-  args.push '--items=' + options.items if options.items
-  args.push '--scales=' + options.scales if options.scales
-  args.push '--save-for-web=' + options.saveForWeb if options.saveForWeb
-  args.push '--bounds=' + options.bounds if options.bounds
-  args.push '--compact=' + options.compact if options.compact
-  args.push '--trimmed=' + options.trimmed if options.trimmed
+  args.push '--trimmed=' + options.trimmed         if options.trimmed
+  args.push '--compression=' + options.compression if options.compression
+  args.push '--scales=' + options.scales           if options.scales
+  args.push '--formats=' + options.formats         if options.formats
+  args.push '--item=' + options.item               if options.item
+  args.push '--progressive'                        if yesOrNo options.progressive
+  args.push '--compact'                            if yesOrNo options.compact
+  args.push '--background=' + options.background   if options.background
+  args.push '--group-contents-only'                if yesOrNo options.groupContentsOnly
+  args.push '--items=' + options.items             if options.items
+  args.push '--save-for-web'                       if yesOrNo options.saveForWeb
+  args.push '--bounds=' + options.bounds           if options.bounds
   
   options.clean = yesOrNo options.clean
   
