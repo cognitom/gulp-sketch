@@ -6,7 +6,7 @@ gulp.task 'default', ->
   gulp.src './coffee/index.coffee'
   .pipe coffee()
   .pipe gulp.dest './'
-  
+
 gulp.task 'test-flat', ->
   gulp.src './test/fixtures/flat.sketch'
   .pipe sketch
@@ -22,7 +22,7 @@ gulp.task 'test-subdir', ->
     formats: 'png'
     saveForWeb: true
   .pipe gulp.dest './tmp/test/subdir'
-  
+
 gulp.task 'test-svg', ->
   gulp.src './test/fixtures/flat.sketch'
   .pipe sketch
@@ -36,4 +36,12 @@ gulp.task 'test-svg-subdir', ->
     export: 'slices'
     formats: 'svg'
   .pipe gulp.dest './tmp/test/svg-subdir'
-  
+
+gulp.task 'test-json', ->
+  gulp.src './test/fixtures/flat.sketch'
+  .pipe sketch
+    export: 'slices'
+    formats: 'png'
+    saveForWeb: true
+    outputJSON: 'data.json'
+  .pipe gulp.dest './tmp/test/json'

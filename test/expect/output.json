@@ -1,0 +1,17 @@
+{
+  "flat.sketch" : {
+    "Page 1" : {
+      "yellow" : {
+        "yellow.svg" : {
+          "format" : "svg",
+          "height" : 100,
+          "x" : 95,
+          "y" : 79,
+          "width" : 100,
+          "name" : "yellow",
+          "scale" : 1
+        }
+      }
+    }
+  }
+}
