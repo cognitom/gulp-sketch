@@ -45,6 +45,10 @@ module.exports = (options = {}) ->
     
     src = file.path
     tmp_dir = new temporary.Dir()
+
+    # Output JSON
+    if options.outputJSON
+      args.push '--outputJSON=' + tmp_dir.path + '/' + options.outputJSON
     
     # SketchTool
     program = spawn cmnd, args.concat src, '--output=' + tmp_dir.path
