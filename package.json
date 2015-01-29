@@ -32,6 +32,7 @@
     "gulp-coffee": "*"
   },
   "scripts": {
+    "prepublish": "gulp",
     "test": "mocha --compilers coffee:coffee-script --require coffee-script/register -R spec"
   },
   "licenses": [
