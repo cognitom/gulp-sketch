@@ -21,23 +21,23 @@ $ npm install gulp-sketch --save-dev
 ## Usage
 
 ```javascript
-var gulp = require("gulp");
-var sketch = require("gulp-sketch");
+var gulp   = require('gulp');
+var sketch = require('gulp-sketch');
 
 gulp.task('sketch', function(){
-  return gulp.src("./src/sketch/*.sketch")
+  return gulp.src('./src/sketch/*.sketch')
     .pipe(sketch({
       export: 'slices',
       formats: 'png'
     }))
-    .pipe(gulp.dest("./dist/images/"));
+    .pipe(gulp.dest('./dist/images/'));
 });
 ```
 
 or write it in CoffeeScript.
 
 ```coffeescript
-gulp = require 'gulp'
+gulp   = require 'gulp'
 sketch = require 'gulp-sketch'
 
 gulp.task 'sketch', ->
@@ -80,3 +80,38 @@ Bohemian Coding mentioned about it in [their article](http://bohemiancoding.com/
 
 > You can give each of your slices their own name, and this is the name that will be used when you save your slice to disk.
 > A neat trick is that you if you include a slash (a '/') it will create subfolders for your first. For example, if you named your slice foo/bar.png, it would first create a folder named 'foo' and then create a image named 'bar.png' in there.
+
+
+## Should include or not include generated files?
+
+Basically not. But sometimes it would be controversial. Because tools like `sketchtool` depends on the environment. Especially Windows user can't use `sketchtool`.
+
+- All members in the team use Mac? - Force to install `sketchtool`. It's free!
+- Most of members in the team use Mac? - Force to install `sketchtool`. Make `sketch`-related tasks skippable for Windows user.
+- Only a designer uses Mac? - Include generated design works and make `sketch`-related tasks optional.
+
+### How to a skip task for Windows user
+
+Check `sketchtool` exists by [npm-which](https://github.com/timoxley/npm-which).
+
+```coffeescript
+var gulp   = require('gulp');
+var sketch = require('gulp-sketch');
+var gutil  = require('gulp-util')
+var which  = require('npm-which')(__dirname);
+
+gulp.task('sketch', function(){
+  try {
+    which.sync('sketchtool');
+  } catch(error){
+    gutil.log(error); return;
+  }
+    
+  return gulp.src('./src/sketch/*.sketch')
+    .pipe(sketch({
+      export: 'slices',
+      formats: 'png'
+    }))
+    .pipe(gulp.dest('./dist/images/'));
+});
+```
