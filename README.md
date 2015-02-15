@@ -90,7 +90,7 @@ Basically not. But sometimes it would be controversial. Because tools like `sket
 - Most of members in the team use Mac? - Force to install `sketchtool`. Make `sketch`-related tasks skippable for Windows user.
 - Only a designer uses Mac? - Include generated design works and make `sketch`-related tasks optional.
 
-### How to a skip task for Windows user
+### How to skip a task for Windows user
 
 Check `sketchtool` exists by [npm-which](https://github.com/timoxley/npm-which).
 
