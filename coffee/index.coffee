@@ -32,32 +32,32 @@ module.exports = (options = {}) ->
   args.push '--items=' + options.items             if options.items
   args.push '--save-for-web'                       if yesOrNo options.saveForWeb
   args.push '--bounds=' + options.bounds           if options.bounds
-  
+
   options.clean = yesOrNo options.clean
-  
+
   through.obj (file, encoding, callback) ->
     if file.isStream()
       @emit 'error', new gutil.PluginError PLUGIN_NAME, 'Streaming not supported'
       return callback()
-    
+
     # file_name.sketch is a directory (=3.0)
     # file_name.sketch is a file (>3.1)
-    
+
     src = file.path
     tmp_dir = new temporary.Dir()
 
     # Output JSON
     if options.outputJSON
       args.push '--outputJSON=' + tmp_dir.path + '/' + options.outputJSON
-    
+
     # SketchTool
     program = spawn cmnd, args.concat src, '--output=' + tmp_dir.path
 
     # Verbose Output
     if options.verbose
-        program.stdout.on 'data', (data) ->
-            gutil.log(data.toString())
-    
+      program.stdout.on 'data', (data) ->
+        gutil.log data.toString()
+
     # return data
     program.stdout.on 'end', =>
       recursive tmp_dir.path, (err, files) =>
