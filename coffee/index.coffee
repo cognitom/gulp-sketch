@@ -52,6 +52,11 @@ module.exports = (options = {}) ->
     
     # SketchTool
     program = spawn cmnd, args.concat src, '--output=' + tmp_dir.path
+
+    # Verbose Output
+    if options.verbose
+        program.stdout.on 'data', (data) ->
+            gutil.log(data.toString())
     
     # return data
     program.stdout.on 'end', =>

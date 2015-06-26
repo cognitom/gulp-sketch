@@ -66,6 +66,10 @@ Additionally, it has `clean` option for exporting SVG.
 
 - `clean`: Remove Sketch namespaces and metadata from SVG (optional, defaults to NO). See [clean-sketch](https://github.com/overblog/clean-sketch).
 
+For debugging purposes, it has `verbose` option for additional output
+
+- `verbose`: Enables verbose output and outputs stdout from `sketchtool` (optional, defaults to false)
+
 
 ## Layer Naming
 
