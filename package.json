@@ -1,7 +1,7 @@
 {
   "name": "gulp-sketch",
   "description": "SketchTool plugin for gulp",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "homepage": "https://github.com/cognitom/gulp-sketch",
   "repository": {
     "type": "git",
