@@ -41,8 +41,9 @@ describe 'gulp-sketch', () ->
         should.exist dist.contents
         dist.path.should.equal path.join __dirname, 'fixtures', 'yellow.svg'
         actual = dist.contents.toString 'utf8'
+        actual = actual.replace /^\s*<!--.*?-->\n/m, '' # remove Generator comments
         expected = fs.readFileSync path.join(__dirname, 'expect', 'yellow.svg'), 'utf8'
-        actual.should.equal expected
+        actual.should.equal expected.trim()
         done()
       stream.write src
 
@@ -58,8 +59,9 @@ describe 'gulp-sketch', () ->
         should.exist dist.contents
         dist.path.should.equal path.join __dirname, 'fixtures', 'square', 'yellow.svg'
         actual = dist.contents.toString 'utf8'
+        actual = actual.replace /^\s*<!--.*?-->\n/m, '' # remove Generator comments
         expected = fs.readFileSync path.join(__dirname, 'expect', 'square-yellow.svg'), 'utf8'
-        actual.should.equal expected
+        actual.should.equal expected.trim()
         done()
       stream.write src
 
