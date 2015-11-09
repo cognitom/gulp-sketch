@@ -1,7 +1,7 @@
 {
   "name": "gulp-sketch",
   "description": "SketchTool plugin for gulp",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "homepage": "https://github.com/cognitom/gulp-sketch",
   "repository": {
     "type": "git",
@@ -18,26 +18,22 @@
   ],
   "dependencies": {
     "clean-sketch": "^1.0.1",
-    "gulp-util": "^3.0.1",
-    "recursive-readdir": "^1.2.0",
-    "rimraf": "^2.2.8",
+    "gulp-util": "^3.0.7",
+    "recursive-readdir": "^1.3.0",
+    "rimraf": "^2.4.3",
     "temporary": "0.0.8",
-    "through2": "^0.6.3"
+    "through2": "^2.0.0"
   },
   "devDependencies": {
-    "coffee-script": "*",
-    "should": "*",
-    "mocha": "*",
-    "gulp": "*",
-    "gulp-coffee": "*"
+    "coffee-script": "^1.10.0",
+    "gulp": "^3.9.0",
+    "gulp-coffee": "^2.3.1",
+    "mocha": "^2.3.3",
+    "should": "^7.1.1"
   },
   "scripts": {
     "prepublish": "gulp",
     "test": "mocha --compilers coffee:coffee-script --require coffee-script/register -R spec"
   },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  "license": "MIT"
 }
