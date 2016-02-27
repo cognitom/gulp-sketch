@@ -66,7 +66,6 @@ module.exports = (options = {}) ->
       @emit 'error', err
       callback()
     .then (cmnd) =>
-      console.log cmnd
       # file_name.sketch is a directory (=3.0)
       # file_name.sketch is a file (>3.1)
 
