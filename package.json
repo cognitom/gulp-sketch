@@ -1,7 +1,7 @@
 {
   "name": "gulp-sketch",
   "description": "SketchTool plugin for gulp",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/cognitom/gulp-sketch",
   "repository": {
     "type": "git",
@@ -29,9 +29,11 @@
     "gulp": "^3.9.0",
     "gulp-coffee": "^2.3.1",
     "mocha": "^2.3.3",
+    "npm-which": "^2.0.0",
     "should": "^7.1.1"
   },
   "scripts": {
+    "install-sketchtool": "sudo sh ./install-sketchtool.sh",
     "prepublish": "gulp",
     "test": "mocha --compilers coffee:coffee-script --require coffee-script/register -R spec"
   },

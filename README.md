@@ -5,18 +5,13 @@ A [SketchTool](http://bohemiancoding.com/sketch/tool/) plugin for [gulp](https:/
 
 ## Install
 
-Download [SketchTool](http://sketchtool.bohemiancoding.com/sketchtool-latest.zip) and install it to your environment by hand or by using the script below.
-
-```bash
-$ curl -L https://raw.githubusercontent.com/cognitom/dotfiles/master/lib/sketchtool.sh | sudo sh
-```
-
-Then, install `gulp-sketch` plugin via `npm`.
+If you're using Sketch.app `ver 3.5` or later, just install `gulp-sketch` via `npm`:
 
 ```bash
 $ npm install gulp-sketch --save-dev
 ```
 
+Are you new to Sketch.app or the user of ver < 3.5 ? See [the section below](#install-sketchtool).
 
 ## Usage
 
@@ -98,7 +93,7 @@ Basically not. But sometimes it would be controversial. Because tools like `sket
 
 Check `sketchtool` exists by [npm-which](https://github.com/timoxley/npm-which).
 
-```coffeescript
+```javascript
 var gulp   = require('gulp');
 var sketch = require('gulp-sketch');
 var gutil  = require('gulp-util')
@@ -110,7 +105,7 @@ gulp.task('sketch', function(){
   } catch(error){
     gutil.log(error); return;
   }
-    
+
   return gulp.src('./src/sketch/*.sketch')
     .pipe(sketch({
       export: 'slices',
@@ -119,3 +114,19 @@ gulp.task('sketch', function(){
     .pipe(gulp.dest('./dist/images/'));
 });
 ```
+
+## Install SketchTool
+
+After the version 3.5, Sketch.app has started bundling `sketchtool`. You don't have to install it manually. Only the cases below, install `sketchtool` by yourself.
+
+### I'm a developer and not have a license of Sketch.app
+
+Don't worry, the tool doesn't need a license. Run this command to install:
+
+```bash
+$ npm run install-sketchtool
+```
+
+### I'm a user of the older version of Sketch.app (< ver 3.5)
+
+Download [SketchTool](http://sketchtool.bohemiancoding.com/sketchtool-latest.zip) and install it to your environment by hand.
