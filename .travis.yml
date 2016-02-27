@@ -1,7 +1,4 @@
 os:
   - osx
-before_install:
-  - npm install -g gulp
-  - curl -L https://raw.githubusercontent.com/cognitom/dotfiles/master/lib/sketchtool.sh | sudo sh
-install: npm install
+install: npm install && npm run install-sketchtool
 script: npm test
