@@ -1,4 +1,5 @@
 {spawn}     = require 'child_process'
+{Promise}   = require 'es6-promise'
 through     = require 'through2'
 fs          = require 'fs'
 path        = require 'path'
