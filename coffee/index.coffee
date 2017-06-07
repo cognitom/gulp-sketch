@@ -81,8 +81,8 @@ module.exports = (options = {}) ->
       program = spawn cmnd, args.concat src, '--output=' + tmp_dir.path
 
       # Verbose Output
-      if options.verbose
-        program.stdout.on 'data', (data) ->
+      program.stdout.on 'data', (data) ->
+        if options.verbose
           gutil.log data.toString()
 
       # return data
